@@ -1,0 +1,14 @@
+<div id="chartDiv" style="position: relative; width: 800px;" *ngIf="lineChartLabels!=0">
+  <div *ngIf="display">
+    <h1 id="chartHeader">{{heading.toUpperCase() || 'AAPL'}}</h1>
+    <canvas baseChart height="200"
+                [datasets]="datasets"
+                [labels]="lineChartLabels"
+                [chartType]="'bar'"
+                [options]="lineChartOptions">
+    </canvas>
+  </div>
+  <div id="notAvailable" *ngIf="!display">
+    <h1 id="headerNotfound">ticker not found</h1>
+  </div>
+</div>

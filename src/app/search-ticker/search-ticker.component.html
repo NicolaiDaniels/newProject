@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+      <div id="interactionDiv" class="col-sm-6 form-group form-inline">
+        <h1 id="interactionHeader">Search for any Stock Ticker..</h1>
+        <div id="inputDiv">
+          <label for="stockInput">Ticker Symbol</label>
+          <div class="buttonNew">
+            <input  type="text" id="stockInput" class="form-control" #stockInput/>
+            <button class="createChart btn btn-primary" (click)="newChart(stockInput.value)">New Chart</button>
+          </div>
+        </div>
+      </div>
+    <div id="chartDiv" class="col-sm-6">
+      <chart [url]="useURL"
+             [heading]="stockInput.value"></chart>
+    </div>
+  </div>
+</div>
