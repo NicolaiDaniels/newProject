@@ -15,7 +15,7 @@
 }
 
 .container {
-  width: 100%;
+  width: 100vw;
 }
 
 .form-group {
@@ -29,7 +29,7 @@
 #inputDiv {
   margin-top: 20%;
   margin-left: 30%;
-  height: 200px;
+  height: 21vh;
   width: 400px;
   padding: 60px 0 0 50px;
   border: 1px solid black;

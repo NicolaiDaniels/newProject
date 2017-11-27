@@ -8,7 +8,9 @@
 
 #available {
   position: relative;
-  top: 17%;
+  height: 55vh;
+  width: 40vw;
+  top: 20%;
   left: 10%;
   background-color: white;
   border: solid 1px black;
@@ -31,4 +33,9 @@
 #headerNotfound {
   padding-top: 30%;
   padding-bottom: 30%;
+}
+
+canvas {
+  height: 50vh;
+  width: 80vh;
 }
