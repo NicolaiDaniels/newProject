@@ -21,6 +21,8 @@
 
 #notAvailable {
   position: relative;
+  height: 55vh;
+  width: 40vw;
   top: 20%;
   left: 10%;
   text-align: center;
