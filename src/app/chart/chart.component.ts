@@ -16,7 +16,9 @@ export class ChartComponent implements OnChanges {
 
     chartServiceData:any;
 
-    public display:boolean = true;
+    //boolean to toggle between chart and not found div
+    display:boolean = true;
+
     //ng2-chart properties initiated
     public barChartData:any;
     public barChartLabels:Array<any> = [];
@@ -24,38 +26,39 @@ export class ChartComponent implements OnChanges {
     public lineChartData:any;
     public lineChartLabels:Array<any> = [];
 
+    //chart option object to make a mixed chart possible
     public lineChartOptions:any = {
       responsive: true,
       tooltips: {
         mode: 'label'
       },
       elements: {
-          line: {
-            fill: false
-          }
+        line: {
+          fill: false
+        }
       },
       scales: {
-          xAxes: [{
-            display: true,
-            gridLines: {
-                display: false
-            }
-          }],
-          yAxes: [{
-            type: "linear",
-            display: true,
-            position: "left",
-            id: "y-axis-1"
-          }, {
-            type: "linear",
-            display: true,
-            position: "right",
-            id: "y-axis-2",
-            gridLines:{
-                display: false
-            }
-          }]
-        }
+        xAxes: [{
+          display: true,
+          gridLines: {
+              display: false
+          }
+        }],
+        yAxes: [{
+          type: "linear",
+          display: true,
+          position: "left",
+          id: "y-axis-1"
+        }, {
+          type: "linear",
+          display: true,
+          position: "right",
+          id: "y-axis-2",
+          gridLines:{
+              display: false
+          }
+        }]
+      }
     };
 
     public datasets:Array<any> =[{
