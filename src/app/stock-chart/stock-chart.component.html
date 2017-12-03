@@ -1,0 +1,11 @@
+<div id="chartDiv" *ngIf="lineChartLabels!=0">
+  <div id="available" *ngIf="display">
+    <h1 id="chartHeader">{{heading.toUpperCase() || 'AAPL'}}</h1>
+    <chart [dataObject]="chartServiceData"
+           [chartType]="'stock'">
+    </chart>
+  </div>
+  <div id="notAvailable" *ngIf="!display">
+    <h1 id="headerNotfound">ticker not found</h1>
+  </div>
+</div>

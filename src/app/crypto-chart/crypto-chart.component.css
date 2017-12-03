@@ -1,0 +1,31 @@
+#cryptoChartDiv {
+  font-size: 15px;
+  color: white;
+  background-image: url(../pictures/tech-coin.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.btn-primary {
+  margin-bottom: 2%;
+}
+#contentDiv {
+  position: relative;
+  height: 75vh;
+  width: 62vw;
+  top: 5%;
+  left: 20%;
+  text-align: center;
+}
+
+#chartDiv {
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 4px 7px 22px 1px rgba(89,92,94,0.36);
+}
+
+#cryptoHeader {
+  font-size: 50px;
+}

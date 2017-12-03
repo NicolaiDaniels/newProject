@@ -4,20 +4,14 @@ import { StockDataService } from '../stock-data.service';
 import { Chart } from 'chart.js';
 import { ChartsModule } from 'ng2-charts';
 
+//Reusable chart component, used by stock-chart and crypto-chart
 @Component({
     selector: 'chart',
     templateUrl: './chart.component.html',
-    styleUrls: ['./chart.component.css'],
-    providers: [ StockDataService ]
 })
 export class ChartComponent implements OnChanges {
-    @Input() url:string;
-    @Input() heading:string;
-
-    chartServiceData:any;
-
-    //boolean to toggle between chart and not found div
-    display:boolean = true;
+    @Input() dataObject:any;
+    @Input() chartType:string;
 
     //ng2-chart properties initiated
     public barChartData:any;
@@ -45,6 +39,11 @@ export class ChartComponent implements OnChanges {
           }
         }],
         yAxes: [{
+          /*ticks: {
+            callback: function(value, index, values) {
+                return '$' + value;
+            }
+          },*/
           type: "linear",
           display: true,
           position: "left",
@@ -67,62 +66,54 @@ export class ChartComponent implements OnChanges {
         fill: 'false',
         yAxisID: 'y-axis-2'
         }, {
-        label: 'price',
+        label: 'price ($)',
         data: this.lineChartData,
         type: 'line',
         fill: 'false',
         yAxisID: 'y-axis-1'
-
       }];
 
-    constructor(private stockDataService: StockDataService){
-    }
+    constructor(){}
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
-        //subscribe to API to receive stock data
-        this.stockDataService.getData(this.url).subscribe(
-
-        data => {
-          if(data['Error Message']){
-            this.display = false;
-            return this.heading = "No such Ticker";
-          }
-
-          this.display = true;
+      console.log(this.dataObject);
           //clear the chart data before setting new
           this.clearData();
-          console.log("VALUE RECEIVED: ", data);
-
           //Set the chart attributes with the received API-Data
-          this.chartServiceData = data['Time Series (Daily)'];
-          this.lineChartLabels = Object.keys(this.chartServiceData).reverse();
+          this.lineChartLabels = Object.keys(this.dataObject).reverse();
 
           //loop through the object with the keys (x-axis) to receive the corresponding price and volume data (y-axis)
-          for (let c of this.lineChartLabels) {
-            let d = this.chartServiceData[c]['4. close'];
-            let e = this.chartServiceData[c]['5. volume'];
-            this.lineChartData.push(parseFloat(d));
-            this.barChartData.push(parseInt(e));
+          if(this.chartType == 'stock') {
+            for (let c of this.lineChartLabels) {
+              let d = this.dataObject[c]['4. close'];
+              let e = this.dataObject[c]['5. volume'];
+              this.lineChartData.push(parseFloat(d));
+              this.barChartData.push(parseInt(e));
+            }
+          }
+          else {
+            for (let c of this.lineChartLabels) {
+              let d = this.dataObject[c]['4a. close (USD)'];
+              let e = this.dataObject[c]['5. volume'];
+              this.lineChartData.push(parseFloat(d));
+              this.barChartData.push(parseInt(e));
+            }
+            //API doesnt allow to scale the amount of  crypto data. Setting manually to a smaller amount of data
+            let arr_length = Math.ceil(this.lineChartData.length / 1.3);
+            this.lineChartLabels = this.lineChartLabels.splice(arr_length,this.lineChartData.length);
+            this.lineChartData = this.lineChartData.splice(arr_length,this.lineChartData.length);
+            this.barChartData = this.barChartData.splice(arr_length,this.lineChartData.length);
           }
 
           //set the dataset for the mixed bar and line chart
           this.datasets[0].data = this.barChartData;
           this.datasets[1].data = this.lineChartData;
 
-        },
-        err => {
-          console.log("ERROR: ", err);
-        },
-        () => {
-          console.log("Completed");
-        }
-      );
     }
 
     //function to clear all chart data
     clearData() {
       this.barChartData = [];
-      this.chartServiceData = [];
       this.lineChartData = [];
       this.lineChartLabels = [];
     }

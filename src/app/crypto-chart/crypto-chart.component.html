@@ -1,0 +1,14 @@
+<div id="cryptoChartDiv">
+  <button class="btn-primary" (click)="navigateToChart()">Stock Charts</button>
+  <div id="contentDiv">
+    <h1 id="cryptoHeader">{{coinName}}</h1>
+    <button class="btn-primary" value="LTC" (click)="newCoin($event)">Litecoin</button>
+    <button class="btn-primary" value="BTC" (click)="newCoin($event)">Bitcoin</button>
+    <button class="btn-primary" value="ETH" (click)="newCoin($event)">Ethereum</button>
+    <div id="chartDiv" *ngIf="lineChartLabels!=0">
+      <chart [dataObject]="cryptoChartData"
+             [chartType]="'crypto'">
+      </chart>
+    </div>
+  </div>
+</div>

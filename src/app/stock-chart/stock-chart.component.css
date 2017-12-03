@@ -16,7 +16,6 @@
   border: solid 1px black;
   border-radius: 5px;
   box-shadow: 4px 7px 22px 1px rgba(89,92,94,0.36);
-
 }
 
 #notAvailable {
@@ -35,9 +34,4 @@
 #headerNotfound {
   padding-top: 30%;
   padding-bottom: 30%;
-}
-
-canvas {
-  height: 50vh;
-  width: 80vh;
 }
