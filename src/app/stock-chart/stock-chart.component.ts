@@ -36,7 +36,6 @@ export class StockChartComponent implements OnChanges {
 
           this.display = true;
           this.stockChartData = data;
-
           //avoid a bug
           this.chartServiceData = data['Time Series (Daily)'];
           this.lineChartLabels = Object.keys(this.chartServiceData).reverse();
